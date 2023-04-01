@@ -33,12 +33,12 @@ protocol InputFilterable {
 
 extension InputFilterable {
     func filterUserInput() -> Int? {
-        if let input = readLine(),
-           let userNumber = Int(input.replacingOccurrences(of: " ", with: "")),
-           0...3 ~= userNumber {
-            return userNumber
+        guard let userInput = readLine()?.replacingOccurrences(of: " ", with: ""),
+              let userInput = Int(userInput),
+              0...3 ~= userInput else {
+            print(GameGuideWords.wrongInput.rawValue)
+            return nil
         }
-        print("잘못된 입력입니다. 다시 시도해주세요.")
-        return nil
+        return userInput
     }
 }
