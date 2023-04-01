@@ -29,7 +29,7 @@ class MukChiBbaGame: InputFilterable {
             }
             
             if userInput == 0 {
-                print("게임 종료")
+                print(GameGuideWords.gameOver.rawValue)
                 return
             }
             

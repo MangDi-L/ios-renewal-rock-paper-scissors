@@ -12,7 +12,7 @@ class RockScissorsPaperGame: InputFilterable {
 
     func startGame() {
         while isGameOver == false {
-            print("가위(1), 바위(2), 보(3)! <종료 : 0> :", terminator: " ")
+            print(GameGuideWords.startRockPaperScissorGame.rawValue, terminator: " ")
 
             guard let userInput = filterUserInput() else { continue }
             
@@ -32,17 +32,17 @@ class RockScissorsPaperGame: InputFilterable {
         let mcbGame = MukChiBbaGame()
         
         if computerPick == userPick {
-            print("비겼습니다!")
+            print(GameGuideWords.tie.rawValue)
             isGameOver = false
             return
         }
         
         switch comparisonOfTwoPicks {
         case (.scissors, .rock), (.rock, .paper), (.paper, .scissors):
-            print("이겼습니다!")
+            print(GameGuideWords.win.rawValue)
             mcbGame.startMukChiBbaGame(turn: Player.user)
         default:
-            print("졌습니다!")
+            print(GameGuideWords.loss.rawValue)
             mcbGame.startMukChiBbaGame(turn: Player.computer)
         }
         isGameOver = true
