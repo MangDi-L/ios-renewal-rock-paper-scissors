@@ -21,32 +21,28 @@ struct RockScissorsPaperGame: InputFilterable {
                 print(GameGuideWords.gameOver.rawValue)
                 isGameOver = true
             default:
-                decideWhoStartsFirstTurn(with: userInput)
+                decideWhoStartsFirstTurn(userInput)
             }
         }
     }
 
-    mutating func decideWhoStartsFirstTurn(with userChoice: Int) {
-        let computerPick = RockScissorsPaper.allCases.randomElement()
-        let userPick = RockScissorsPaper(rawValue: userChoice)
-        let comparisonOfTwoPicks = (computerPick, userPick)
+    mutating func decideWhoStartsFirstTurn(_ userInput: Int) {
+        guard let userHand = RockScissorsPaper(rawValue: userInput),
+              let computerHand = RockScissorsPaper.allCases.randomElement() else { return }
         var mcbGame = MukChiBbaGame()
-        
-        if computerPick == userPick {
-            print(GameGuideWords.tie.rawValue)
-            isGameOver = false
-            return
-        }
-        
-        switch comparisonOfTwoPicks {
+
+        switch (userHand, computerHand) {
         case (.scissors, .rock), (.rock, .paper), (.paper, .scissors):
-            print(GameGuideWords.win.rawValue)
-            mcbGame.startMukChiBbaGame(turn: Player.user)
-        default:
             print(GameGuideWords.loss.rawValue)
+            isGameOver = true
             mcbGame.startMukChiBbaGame(turn: Player.computer)
+        case (.scissors, .paper), (.rock, .scissors), (.paper, .rock):
+            print(GameGuideWords.win.rawValue)
+            isGameOver = true
+            mcbGame.startMukChiBbaGame(turn: Player.user)
+        case (_, _):
+            print(GameGuideWords.tie.rawValue)
         }
-        isGameOver = true
     }
 }
 
