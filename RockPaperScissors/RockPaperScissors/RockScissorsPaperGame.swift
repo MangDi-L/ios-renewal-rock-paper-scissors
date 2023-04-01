@@ -8,12 +8,6 @@
 import Foundation
 
 class RockScissorsPaperGame: InputFilterable {
-    enum RockScissorsPaper: Int, CaseIterable {
-        case scissors = 1
-        case rock = 2
-        case paper = 3
-    }
-    
     var isGameOver: Bool = false
 
     func startGame() {
