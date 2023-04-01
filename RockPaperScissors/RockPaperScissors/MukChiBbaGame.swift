@@ -8,12 +8,6 @@
 import Foundation
 
 struct MukChiBbaGame: InputFilterable {
-    enum MukChiBba: Int, CaseIterable {
-        case muk = 1
-        case chi = 2
-        case bba = 3
-    }
-    
     var isGameOver: Bool = false
     var attacker: Player = Player.user
 
@@ -38,8 +32,8 @@ struct MukChiBbaGame: InputFilterable {
     }
     
     mutating func decideWinner(userInput: Int, turn: Player) {
-        guard let computerPick = MukChiBba.allCases.randomElement(),
-              let userPick = MukChiBba(rawValue: userInput) else { return }
+        guard let computerPick = RockScissorsPaper.allCases.randomElement(),
+              let userPick = RockScissorsPaper(rawValue: userInput) else { return }
         
         if computerPick == userPick {
             print("\(turn.rawValue)의 승리!")
@@ -49,9 +43,9 @@ struct MukChiBbaGame: InputFilterable {
         }
     }
     
-    mutating func decideWhoseTurn(_ comparisonOfTwoPicks: (MukChiBba, MukChiBba)) {
+    mutating func decideWhoseTurn(_ comparisonOfTwoPicks: (RockScissorsPaper, RockScissorsPaper)) {
         switch comparisonOfTwoPicks {
-        case (.muk, .bba), (.chi, .muk), (.bba, .chi):
+        case (.rock, .paper), (.scissors, .rock), (.paper, .scissors):
             attacker = Player.user
         default:
             attacker = Player.computer

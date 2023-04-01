@@ -29,7 +29,7 @@ struct RockScissorsPaperGame: InputFilterable {
         let computerPick = RockScissorsPaper.allCases.randomElement()
         let userPick = RockScissorsPaper(rawValue: userChoice)
         let comparisonOfTwoPicks = (computerPick, userPick)
-        let mcbGame = MukChiBbaGame()
+        var mcbGame = MukChiBbaGame()
         
         if computerPick == userPick {
             print(GameGuideWords.tie.rawValue)
