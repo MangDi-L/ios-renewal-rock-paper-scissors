@@ -44,8 +44,8 @@ struct MukChiBbaGame: InputFilterable {
         }
     }
     
-    mutating func decideWhoseTurn(_ comparisonOfTwoPicks: (RockScissorsPaper, RockScissorsPaper)) {
-        switch comparisonOfTwoPicks {
+    mutating func decideWhoseTurn(_ comparisonOfTwoHands: (RockScissorsPaper, RockScissorsPaper)) {
+        switch comparisonOfTwoHands {
         case (.rock, .paper), (.scissors, .rock), (.paper, .scissors):
             turn = Player.user
         default:
