@@ -33,14 +33,14 @@ struct MukChiBbaGame: InputFilterable {
     }
     
     mutating func decideWinner(userInput: Int) {
-        guard let computerPick = RockScissorsPaper.allCases.randomElement(),
-              let userPick = RockScissorsPaper(rawValue: userInput) else { return }
+        guard let computerHand = RockScissorsPaper.allCases.randomElement(),
+              let userHand = RockScissorsPaper(rawValue: userInput) else { return }
         
-        if computerPick == userPick {
+        if computerHand == userHand {
             print("\(turn.rawValue)의 승리!")
             isGameOver = true
         } else {
-            decideWhoseTurn((computerPick, userPick))
+            decideWhoseTurn((computerHand, userHand))
         }
     }
     
