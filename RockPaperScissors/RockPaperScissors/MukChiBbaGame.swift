@@ -9,16 +9,16 @@ import Foundation
 
 struct MukChiBbaGame: InputFilterable {
     var isGameOver: Bool = false
-    var attacker: Player = .user
+    var turn: Player = .user
 
-    mutating func startMukChiBbaGame(turn: Player) {
-        attacker = turn
+    mutating func startMukChiBbaGame(startTurn: Player) {
+        turn = startTurn
         
         while isGameOver == false {
-            print("[\(attacker.rawValue) 턴] (묵(1), 찌(2), 빠(3)! <종료 : 0> : ", terminator: "")
+            print("[\(turn.rawValue) 턴] (묵(1), 찌(2), 빠(3)! <종료 : 0> : ", terminator: "")
             
             guard let userInput = filterUserInput() else {
-                attacker = .computer
+                turn = .computer
                 continue
             }
 
@@ -27,12 +27,12 @@ struct MukChiBbaGame: InputFilterable {
                 print(GameGuideWords.gameOver.rawValue)
                 isGameOver = true
             default:
-                decideWinner(userInput: userInput, turn: attacker)
+                decideWinner(userInput: userInput)
             }
         }
     }
     
-    mutating func decideWinner(userInput: Int, turn: Player) {
+    mutating func decideWinner(userInput: Int) {
         guard let computerPick = RockScissorsPaper.allCases.randomElement(),
               let userPick = RockScissorsPaper(rawValue: userInput) else { return }
         
@@ -47,10 +47,10 @@ struct MukChiBbaGame: InputFilterable {
     mutating func decideWhoseTurn(_ comparisonOfTwoPicks: (RockScissorsPaper, RockScissorsPaper)) {
         switch comparisonOfTwoPicks {
         case (.rock, .paper), (.scissors, .rock), (.paper, .scissors):
-            attacker = Player.user
+            turn = Player.user
         default:
-            attacker = Player.computer
+            turn = Player.computer
         }
-        print("\(attacker.rawValue)의 턴입니다")
+        print("\(turn.rawValue)의 턴입니다")
     }
 }

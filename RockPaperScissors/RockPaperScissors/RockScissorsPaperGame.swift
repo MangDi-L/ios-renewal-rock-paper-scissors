@@ -35,11 +35,11 @@ struct RockScissorsPaperGame: InputFilterable {
         case (.scissors, .rock), (.rock, .paper), (.paper, .scissors):
             print(GameGuideWords.loss.rawValue)
             isGameOver = true
-            mcbGame.startMukChiBbaGame(turn: Player.computer)
+            mcbGame.startMukChiBbaGame(startTurn: .computer)
         case (.scissors, .paper), (.rock, .scissors), (.paper, .rock):
             print(GameGuideWords.win.rawValue)
             isGameOver = true
-            mcbGame.startMukChiBbaGame(turn: Player.user)
+            mcbGame.startMukChiBbaGame(startTurn: .user)
         case (_, _):
             print(GameGuideWords.tie.rawValue)
         }
