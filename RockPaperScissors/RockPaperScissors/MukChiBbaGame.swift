@@ -9,7 +9,7 @@ import Foundation
 
 struct MukChiBbaGame: InputFilterable {
     var isGameOver: Bool = false
-    var attacker: Player = Player.user
+    var attacker: Player = .user
 
     mutating func startMukChiBbaGame(turn: Player) {
         attacker = turn
@@ -18,16 +18,17 @@ struct MukChiBbaGame: InputFilterable {
             print("[\(attacker.rawValue) 턴] (묵(1), 찌(2), 빠(3)! <종료 : 0> : ", terminator: "")
             
             guard let userInput = filterUserInput() else {
-                attacker = Player.computer
+                attacker = .computer
                 continue
             }
-            
-            if userInput == 0 {
+
+            switch userInput {
+            case 0:
                 print(GameGuideWords.gameOver.rawValue)
-                return
+                isGameOver = true
+            default:
+                decideWinner(userInput: userInput, turn: attacker)
             }
-            
-            decideWinner(userInput: userInput, turn: attacker)
         }
     }
     
