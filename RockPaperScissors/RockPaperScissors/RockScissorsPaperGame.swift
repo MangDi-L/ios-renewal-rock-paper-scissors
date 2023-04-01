@@ -15,13 +15,14 @@ struct RockScissorsPaperGame: InputFilterable {
             print(GameGuideWords.startRockPaperScissorGame.rawValue, terminator: " ")
 
             guard let userInput = filterUserInput() else { continue }
-            
-            if userInput == 0 {
-                print("게임 종료")
-                return
+
+            switch userInput {
+            case 0:
+                print(GameGuideWords.gameOver.rawValue)
+                isGameOver = true
+            default:
+                decideWhoStartsFirstTurn(with: userInput)
             }
-            
-            decideWhoStartsFirstTurn(with: userInput)
         }
     }
 
