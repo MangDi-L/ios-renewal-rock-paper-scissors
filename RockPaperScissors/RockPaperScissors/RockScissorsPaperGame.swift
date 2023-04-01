@@ -7,10 +7,10 @@
 
 import Foundation
 
-class RockScissorsPaperGame: InputFilterable {
+struct RockScissorsPaperGame: InputFilterable {
     var isGameOver: Bool = false
 
-    func startGame() {
+    mutating func startGame() {
         while isGameOver == false {
             print(GameGuideWords.startRockPaperScissorGame.rawValue, terminator: " ")
 
@@ -25,7 +25,7 @@ class RockScissorsPaperGame: InputFilterable {
         }
     }
 
-    func decideWhoStartsFirstTurn(with userChoice: Int) {
+    mutating func decideWhoStartsFirstTurn(with userChoice: Int) {
         let computerPick = RockScissorsPaper.allCases.randomElement()
         let userPick = RockScissorsPaper(rawValue: userChoice)
         let comparisonOfTwoPicks = (computerPick, userPick)

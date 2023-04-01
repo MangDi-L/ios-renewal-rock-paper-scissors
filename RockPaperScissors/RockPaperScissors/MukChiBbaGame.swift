@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MukChiBbaGame: InputFilterable {
+struct MukChiBbaGame: InputFilterable {
     enum MukChiBba: Int, CaseIterable {
         case muk = 1
         case chi = 2
@@ -17,7 +17,7 @@ class MukChiBbaGame: InputFilterable {
     var isGameOver: Bool = false
     var attacker: Player = Player.user
 
-    func startMukChiBbaGame(turn: Player) {
+    mutating func startMukChiBbaGame(turn: Player) {
         attacker = turn
         
         while isGameOver == false {
@@ -37,7 +37,7 @@ class MukChiBbaGame: InputFilterable {
         }
     }
     
-    func decideWinner(userInput: Int, turn: Player) {
+    mutating func decideWinner(userInput: Int, turn: Player) {
         guard let computerPick = MukChiBba.allCases.randomElement(),
               let userPick = MukChiBba(rawValue: userInput) else { return }
         
@@ -49,7 +49,7 @@ class MukChiBbaGame: InputFilterable {
         }
     }
     
-    func decideWhoseTurn(_ comparisonOfTwoPicks: (MukChiBba, MukChiBba)) {
+    mutating func decideWhoseTurn(_ comparisonOfTwoPicks: (MukChiBba, MukChiBba)) {
         switch comparisonOfTwoPicks {
         case (.muk, .bba), (.chi, .muk), (.bba, .chi):
             attacker = Player.user
